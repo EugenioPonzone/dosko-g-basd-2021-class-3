@@ -134,9 +134,17 @@ footer .contact h3{
 footer .socialMedia li{
     display: inline-block;
 }
+footer .contact li{
+    padding-bottom:5px ;
+}
+footer .contact a{
+    color:white;
+    text-decoration: none;
+}
 footer .copyRight{
     font-size: 0.8em;
 }
+
 
 
 @media (min-width: 421px){
