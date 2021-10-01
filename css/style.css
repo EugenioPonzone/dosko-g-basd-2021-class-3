@@ -48,12 +48,11 @@ main{
     flex-direction: column-reverse;
 }
 main a{
+    width: 100%;
     color:black;
     text-decoration: none;
-    width: 100%;
 }
 /*  SECTION */
-
 .containerSections section .mainNew,
 .containerSections section .secondaryNew{
     border-bottom: 1px black solid;
@@ -96,8 +95,8 @@ aside{
 }
 aside #currencies,
 aside #weather{
-    border: 2px solid darkgray;
     flex:1;
+    border: 2px solid darkgray;
     background-color: #333;
     color: #ddd;
 }
@@ -111,15 +110,36 @@ aside #mostRead{
 
 /* FOOTER */
 footer{
-    padding: 2em;
-    text-align: center;
+    padding: 2em 2em 1em;
     background-color: #333;
     color: white;
+    text-align: center;
+}
+
+footer .container{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2em;
+ 
+}
+footer .socialMedia h3,
+footer .contact h3{
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+footer .socialMedia li{
+    display: inline-block;
+}
+footer .copyRight{
+    font-size: 0.8em;
 }
 
 
 @media (min-width: 421px){
-
     /* nav */
     nav{
         flex-wrap: wrap;
@@ -139,9 +159,7 @@ footer{
     /* SECTION */
     main{
         flex-direction: row;
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding:10px
     }
     main .containerSections{
         flex:4;
@@ -156,19 +174,19 @@ footer{
         margin-top: 10px;
     }
     main .containerSections  #secondarySection .secondaryNew{
-        margin-top: 10px;
         width: 250px;
+        margin-top: 10px;
         font-size: 0.7em;
     }
     /*ASIDE */
-    aside{
+    main aside{
         flex:1;
         flex-direction: column;
         padding-left: 10px;
         background-color: #f4f4f4;
     }
-    aside #currencies,  
-    aside #weather{
+    main aside #currencies,  
+    main aside #weather{
         flex:none;
         border:black;
         background-color: #333;
@@ -176,51 +194,74 @@ footer{
         box-shadow: 0 0 3px black;
     }
     
-    aside #mostRead{
-        display: block;
-        /* padding-left: 15px; */
-        
+    main aside #mostRead{
+        display: block; 
     }
-    aside #mostRead h4{
+    main aside #mostRead h4{
         display: inline-block;
         margin-bottom: 10px;
+        border-bottom: 2px solid black;
         font-size: 1em;
         text-transform: uppercase;
-        border-bottom: 2px solid black;
     }
-    aside #mostRead ol{
-        /* list-style-type:decimal; */
+    main aside #mostRead ol{
         font-size: 0.8em;
     }
-    aside #mostRead li{
+    main aside #mostRead li{
         margin-bottom: 10px;
         text-align: left;
     }
-
-    aside #mostRead a{
+    main aside #mostRead a{
         margin: 5px 0;
         font-weight: normal;
     }
-    aside #mostRead a img{
+    main aside #mostRead a img{
         display: none;
     }
-
-    aside #mostRead a .firstMostRead{
+    main aside #mostRead a .listNumber{
+        font-weight: bold;
+    }
+    main aside #mostRead a .firstMostRead{
         font-weight: bold;
         font-size:1.1em;
     }
 }
 
-/* @media (min-width: 800px)
-    aside #mostRead a{
+
+@media (min-width: 801px){
+    main{
+        padding: 30px;
+    }
+    main .containerSections{
+        flex:2;
+        padding-right: 10px;
+        border-right: 3px solid darkgray ;
+    }
+    main .containerSections #mainSection .mainNew a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    main .containerSections #mainSection .mainNew .mainImg{
+        width: 455px;
+    } 
+    main aside{
+        flex:1;
+        align-items: center ;
+    }
+    main aside #currencies,  
+    main aside #weather{
+        padding: 20px;
+    }
+
+    main aside #mostRead a{
         display: flex;
         justify-items: center;
         align-items: center;
-        margin: 5px 0;
-        font-size: 0.8em;
-        font-weight: normal;
+        font-size: 1em;
     }
-    aside #mostRead a img{
-        margin-left: 5px;
+    main aside #mostRead a img{
+        display: block;
+        margin:0 5px;
     }
-}    */
+}   
