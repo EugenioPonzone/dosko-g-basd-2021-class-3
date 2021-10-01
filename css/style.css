@@ -1,0 +1,119 @@
+body{
+    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.fixed-container{
+    position: fixed;
+    top:0;
+    z-index: 1;
+    width: 100%;
+}
+/* HEADER */
+header{
+    padding: 1em;
+    border-bottom:3px darkgray solid;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+header h2{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+/* NAV */
+nav{    
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5em;
+    background-color: #f4f4f4;
+    border-bottom:3px black solid;
+    text-align: center;
+}
+nav a{
+    color: #333;
+}
+/* MAIN */
+main{
+    display: flex;
+    flex-direction: column;
+    padding-top:85px ;
+}
+main a{
+    color:black;
+    text-decoration: none;
+    width: 100%;
+}
+/*  SECTION */
+#mainSection{
+    order: 2;
+}
+#secondarySection{
+    order:3;
+}
+section .mainNew,
+section .secondaryNew{
+    border-bottom: 1px black solid;
+}
+section .mainNew .mainImg ,
+section .secondaryNew .secondaryImg{
+    position: relative;
+}
+section .mainNew .mainImg .category ,
+section .secondaryNew .secondaryImg .category{
+    position: absolute;
+    top:5px;
+    left:5px;
+    padding: 6px;
+    background-color: #333;
+    color: white;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+section .mainNew .mainImg img,
+section .secondaryNew .secondaryImg img{
+    width: 100%;
+}
+section .mainNew .title,
+section .secondaryNew .title{
+    padding: 10px;
+    font-size: 1.3em;
+    line-height: 1.5em;
+}
+section .mainNew span{
+    font-weight: bold;
+}
+/* ASIDE */
+aside{
+    display: flex;
+    justify-content: space-around;
+    
+    background-color: green;
+    font-weight: bold;
+    text-align: center;
+}
+aside #currencies,
+aside #weather{
+    border: 2px solid black;
+    flex:1;
+}
+aside #currencies div,
+aside #weather div{
+    padding: 10px;
+}
+/* FOOTER */
+footer{
+    padding: 2em;
+    text-align: center;
+    background-color: #333;
+    color: white;
+}
+
+
+/* @media (min-width: 420px){
+
+}
+
+@media (min-width: 800px)
+
+}    */
