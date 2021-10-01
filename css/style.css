@@ -3,7 +3,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 .fixed-container{
-    position: fixed;
+    position: sticky;
     top:0;
     z-index: 1;
     width: 100%;
@@ -13,30 +13,39 @@ header{
     padding: 1em;
     border-bottom:3px darkgray solid;
     background-color: #333;
-    color: white;
     text-align: center;
 }
+header a{
+    text-decoration: none;
+    color: white;
+}
 header h2{
+    display: inline;
     font-weight: bold;
     text-transform: uppercase;
 }
 /* NAV */
-nav{    
+nav .buttom{
+    display: none;
+}
+nav {    
     display: flex;
     justify-content: space-around;
     padding: 0.5em;
     background-color: #f4f4f4;
-    border-bottom:3px black solid;
+    border-bottom:3px darkgray solid;
     text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 nav a{
-    color: #333;
+    color: #555;
+    text-decoration: none;
 }
 /* MAIN */
 main{
     display: flex;
-    flex-direction: column;
-    padding-top:85px ;
+    flex-direction: column-reverse;
 }
 main a{
     color:black;
@@ -44,22 +53,17 @@ main a{
     width: 100%;
 }
 /*  SECTION */
-#mainSection{
-    order: 2;
-}
-#secondarySection{
-    order:3;
-}
-section .mainNew,
-section .secondaryNew{
+
+.containerSections section .mainNew,
+.containerSections section .secondaryNew{
     border-bottom: 1px black solid;
 }
-section .mainNew .mainImg ,
-section .secondaryNew .secondaryImg{
+.containerSections section .mainNew .mainImg ,
+.containerSections section .secondaryNew .secondaryImg{
     position: relative;
 }
-section .mainNew .mainImg .category ,
-section .secondaryNew .secondaryImg .category{
+.containerSections section .mainNew .mainImg .category ,
+.containerSections section .secondaryNew .secondaryImg .category{
     position: absolute;
     top:5px;
     left:5px;
@@ -70,37 +74,41 @@ section .secondaryNew .secondaryImg .category{
     letter-spacing: 1px;
     text-transform: uppercase;
 }
-section .mainNew .mainImg img,
-section .secondaryNew .secondaryImg img{
+.containerSections section .mainNew .mainImg img,
+.containerSections section .secondaryNew .secondaryImg img{
     width: 100%;
 }
-section .mainNew .title,
-section .secondaryNew .title{
+.containerSections section .mainNew .title,
+.containerSections section .secondaryNew .title{
     padding: 10px;
     font-size: 1.3em;
     line-height: 1.5em;
 }
-section .mainNew span{
+.containerSections section .mainNew span{
     font-weight: bold;
 }
 /* ASIDE */
 aside{
     display: flex;
     justify-content: space-around;
-    
-    background-color: green;
     font-weight: bold;
     text-align: center;
 }
 aside #currencies,
 aside #weather{
-    border: 2px solid black;
+    border: 2px solid darkgray;
     flex:1;
+    background-color: #333;
+    color: #ddd;
 }
 aside #currencies div,
 aside #weather div{
     padding: 10px;
 }
+aside #mostRead{
+    display: none;
+}
+
 /* FOOTER */
 footer{
     padding: 2em;
@@ -110,10 +118,109 @@ footer{
 }
 
 
-/* @media (min-width: 420px){
+@media (min-width: 421px){
 
+    /* nav */
+    nav{
+        flex-wrap: wrap;
+    }
+    nav #hamburger{
+        display: none;
+    }
+    nav .buttom, 
+    nav #search{
+        display: flex;
+        padding: 3px 10px;
+    }
+    nav .buttom a:hover{
+        color: black;
+    }
+
+    /* SECTION */
+    main{
+        flex-direction: row;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    main .containerSections{
+        flex:4;
+        padding-right: 10px;
+        border-right: 3px solid darkgray ;
+    }
+
+    main .containerSections  #secondarySection{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+    main .containerSections  #secondarySection .secondaryNew{
+        margin-top: 10px;
+        width: 250px;
+        font-size: 0.7em;
+    }
+    /*ASIDE */
+    aside{
+        flex:1;
+        flex-direction: column;
+        padding-left: 10px;
+        background-color: #f4f4f4;
+    }
+    aside #currencies,  
+    aside #weather{
+        flex:none;
+        border:black;
+        background-color: #333;
+        color: #ddd;
+        box-shadow: 0 0 3px black;
+    }
+    
+    aside #mostRead{
+        display: block;
+        /* padding-left: 15px; */
+        
+    }
+    aside #mostRead h4{
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 1em;
+        text-transform: uppercase;
+        border-bottom: 2px solid black;
+    }
+    aside #mostRead ol{
+        /* list-style-type:decimal; */
+        font-size: 0.8em;
+    }
+    aside #mostRead li{
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+    aside #mostRead a{
+        margin: 5px 0;
+        font-weight: normal;
+    }
+    aside #mostRead a img{
+        display: none;
+    }
+
+    aside #mostRead a .firstMostRead{
+        font-weight: bold;
+        font-size:1.1em;
+    }
 }
 
-@media (min-width: 800px)
-
+/* @media (min-width: 800px)
+    aside #mostRead a{
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        margin: 5px 0;
+        font-size: 0.8em;
+        font-weight: normal;
+    }
+    aside #mostRead a img{
+        margin-left: 5px;
+    }
 }    */
