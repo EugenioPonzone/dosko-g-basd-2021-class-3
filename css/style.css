@@ -42,6 +42,16 @@ nav a{
     color: #555;
     text-decoration: none;
 }
+.date{
+    padding: 5px;
+    border-bottom:3px darkgray solid;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    /* text-transform: uppercase; */
+    background-color: #f4f4f4;
+    color: #555;
+}
 /* MAIN */
 main{
     display: flex;
@@ -84,14 +94,32 @@ main a{
     line-height: 1.5em;
 }
 .containerSections section .mainNew span{
-    font-weight: bold;
+    font-size: 0.8em;
 }
+.containerSections section .mainNew h1{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.3em;
+}
+.containerSections section .mainNew .content{
+    padding: 0 10px 10px;
+    font-size: 1.2em;
+    line-height: 1.2em;
+}
+
 /* ASIDE */
 aside{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     font-weight: bold;
     text-align: center;
+}
+aside .advertising{
+    padding: 10px 0;
+}
+aside .advertising img{
+    width: 100%;   
 }
 aside #currencies,
 aside #weather{
@@ -196,12 +224,12 @@ footer .copyRight{
     main aside #currencies,  
     main aside #weather{
         flex:none;
+        margin-bottom: 10px;
         border:black;
         background-color: #333;
         color: #ddd;
         box-shadow: 0 0 3px black;
     }
-    
     main aside #mostRead{
         display: block; 
     }
@@ -233,7 +261,19 @@ footer .copyRight{
         font-weight: bold;
         font-size:1.1em;
     }
+    main aside .advertising a img{
+        box-shadow: 0 0 5px black;
+        animation: bright 2s ease-out;
+        animation-iteration-count: infinite;
+    }
+    @keyframes bright {
+    50%{box-shadow: 0 0 0px white ;}
+    100%{box-shadow: 0 0 10px black ;}
+    }
+
 }
+
+
 
 
 @media (min-width: 801px){
@@ -253,6 +293,9 @@ footer .copyRight{
     main .containerSections #mainSection .mainNew .mainImg{
         width: 455px;
     } 
+    main .containerSections #secondarySection .secondaryNew:hover{
+        box-shadow: 0 0 5px black;
+    }
     main aside{
         flex:1;
         align-items: center ;
@@ -261,7 +304,6 @@ footer .copyRight{
     main aside #weather{
         padding: 20px;
     }
-
     main aside #mostRead a{
         display: flex;
         justify-items: center;
