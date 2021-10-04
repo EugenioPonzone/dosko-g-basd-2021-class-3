@@ -48,7 +48,6 @@ nav a{
     font-style: italic;
     font-weight: bold;
     text-align: center;
-    /* text-transform: uppercase; */
     background-color: #f4f4f4;
     color: #555;
 }
@@ -86,18 +85,19 @@ main a{
 .containerSections section .mainNew .mainImg img,
 .containerSections section .secondaryNew .secondaryImg img{
     width: 100%;
+    height: auto;
 }
 .containerSections section .mainNew .title,
 .containerSections section .secondaryNew .title{
     padding: 10px;
     font-size: 1.3em;
     line-height: 1.5em;
+    font-weight: bold;
 }
 .containerSections section .mainNew span{
     font-size: 0.8em;
 }
 .containerSections section .mainNew h1{
-    font-weight: bold;
     text-transform: uppercase;
     font-size: 1.3em;
 }
@@ -106,7 +106,6 @@ main a{
     font-size: 1.2em;
     line-height: 1.2em;
 }
-
 /* ASIDE */
 aside{
     display: flex;
@@ -116,10 +115,12 @@ aside{
     text-align: center;
 }
 aside .advertising{
+    width: 55%;
     padding: 10px 0;
 }
 aside .advertising img{
     width: 100%;   
+    height: auto;
 }
 aside #currencies,
 aside #weather{
@@ -135,7 +136,6 @@ aside #weather div{
 aside #mostRead{
     display: none;
 }
-
 /* FOOTER */
 footer{
     padding: 2em 2em 1em;
@@ -174,7 +174,6 @@ footer .copyRight{
 }
 
 
-
 @media (min-width: 421px){
     /* nav */
     nav{
@@ -191,7 +190,6 @@ footer .copyRight{
     nav .buttom a:hover{
         color: black;
     }
-
     /* SECTION */
     main{
         flex-direction: row;
@@ -202,11 +200,11 @@ footer .copyRight{
         padding-right: 10px;
         border-right: 3px solid darkgray ;
     }
-
     main .containerSections  #secondarySection{
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
+        align-items: flex-start;
         margin-top: 10px;
     }
     main .containerSections  #secondarySection .secondaryNew{
@@ -218,8 +216,13 @@ footer .copyRight{
     main aside{
         flex:1;
         flex-direction: column;
+        align-items: center;
         padding-left: 10px;
         background-color: #f4f4f4;
+    }
+    aside .advertising{
+        width: 70%;
+        padding: 10px 0;
     }
     main aside #currencies,  
     main aside #weather{
@@ -270,10 +273,7 @@ footer .copyRight{
     50%{box-shadow: 0 0 0px white ;}
     100%{box-shadow: 0 0 10px black ;}
     }
-
 }
-
-
 
 
 @media (min-width: 801px){
@@ -312,6 +312,12 @@ footer .copyRight{
     }
     main aside #mostRead a img{
         display: block;
+        width: 70px;
+        height: 70px;
         margin:0 5px;
+    }
+    main aside #mostRead a img.firstImg{
+        width: 90px;
+        height: 90px;
     }
 }   
