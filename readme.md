@@ -4,7 +4,7 @@
 - Newspapper layout creation based on 3WSchool proposal.
 
 ## Github Pages
-- https://eugenioponzone.github.io/dosko-g-basd-2021-class-3/index.html
+- https://eugenioponzone.github.io/ponzone-e-basd-2021-class-3/
 
 ## Author
 Eugenio Ponzone
