@@ -178,6 +178,43 @@ footer .copyRight{
     font-size: 0.8em;
 }
 
+/* FORM */
+form{
+    width: 100%;
+}
+
+form ul li{
+    width: 100%;
+    margin: 16px 0;
+    text-align: center;
+}
+
+form ul li label{
+    display: block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+form ul li input[type="text"],
+form ul li input[type="password"]{
+    width: 80%;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 4px black;
+    box-sizing: border-box;
+}
+
+form ul li input[type="submit"]{
+    padding: 15px;
+    border-radius: 1em;
+    background-color: rgb(1, 133, 56);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
 
 @media (min-width: 421px){
     /* nav */
@@ -342,4 +379,33 @@ footer .copyRight{
         width: 90px;
         height: 90px;
     }
+
+    form{
+        display: flex;
+        justify-content: center;   
+    }
+
+    form ul{
+        width: 50%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    form ul li{
+        width: 50%;
+        float: left;
+    }
+
+    form ul li:last-child{
+        width: 100%;
+    }
+    form ul li input[type="submit"]{
+        cursor: pointer;
+    }
+    form ul li input[type="submit"]:hover{
+        background-color: rgb(24, 104, 58);
+    }
+
+
 }   
+
