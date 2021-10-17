@@ -47,6 +47,18 @@ window.onload = function () {
     postcode.addEventListener('blur', validatePostcode);
     dni.addEventListener('blur',validateDni);
     
+    //EVENTS FOCUS
+    names.addEventListener('focus', focusName);
+    email.addEventListener('focus', focusEmail);
+    password.addEventListener('focus', focusPassword);
+    password2.addEventListener('focus', focusPassword2);
+    age.addEventListener('focus', focusAge);
+    tel.addEventListener('focus',focusTel);
+    address.addEventListener('focus',focusAddress);
+    city.addEventListener('focus', focusCity);
+    postcode.addEventListener('focus', focusPostcode);
+    dni.addEventListener('focus',focusDni);
+
     //FUNCTIONS VALIDATIOS ********************************************
     //VALIDATE NAME 
     function validateName() {
@@ -376,4 +388,60 @@ window.onload = function () {
     }
 
 
+    // FUNCTIONS FOCUS ***********************************************************
+    function focusName(){
+        if(nameMsg.parentNode){
+            names.parentElement.removeChild(nameMsg);
+        }
+    }
+    function focusEmail(){
+        if(emailMsg.parentNode){
+            email.parentElement.removeChild(emailMsg);
+        }
+    }
+    function focusPassword(){
+        if(passwordMsg.parentNode){
+            password.parentElement.removeChild(passwordMsg);
+        }
+    }
+    function focusPassword2(){
+        if(password2Msg.parentNode){
+            password2.parentElement.removeChild(password2Msg);
+        }
+    }
+    function focusAge(){
+        if(ageMsg.parentNode){
+            age.parentElement.removeChild(ageMsg);
+        }
+    }
+    function focusTel(){
+        if(telMsg.parentNode){
+            tel.parentElement.removeChild(telMsg);
+        }
+    }
+    function focusAddress(){
+        if(addressMsg.parentNode){
+            address.parentElement.removeChild(addressMsg);
+        }
+    }
+    function focusCity(){
+        if(cityMsg.parentNode){
+            city.parentElement.removeChild(cityMsg);
+        }
+    }
+    function focusPostcode(){
+        if(postcodeMsg.parentNode){
+            postcode.parentElement.removeChild(postcodeMsg);
+        }
+    }
+    function focusDni(){
+        if(dniMsg.parentNode){
+            dni.parentElement.removeChild(dniMsg);
+        }
+    }
+
 }
+
+
+
+
