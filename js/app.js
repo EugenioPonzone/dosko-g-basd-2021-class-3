@@ -11,6 +11,7 @@ window.onload = function () {
     var city = document.getElementById('city');
     var postcode = document.getElementById('postcode');
     var dni = document.getElementById('dni');
+    var form = document.getElementsByTagName('form')[0];
 
     //CREATE ELEMENTS TO ERROR MSGs
     var nameMsg  = document.createElement('p');
@@ -33,8 +34,17 @@ window.onload = function () {
     cityMsg.classList.add('errorMsg');
     postcodeMsg.classList.add('errorMsg');
     dniMsg.classList.add('errorMsg');
+    nameMsg.id= 'nameMsg'; 
+    emailMsg.id= 'emailMsg'; 
+    passwordMsg.id= 'passwordMsg'; 
+    password2Msg.id= 'password2Msg'; 
+    ageMsg.id= 'ageMsg'; 
+    telMsg.id= 'telMsg'; 
+    addressMsg.id= 'addressMsg'; 
+    cityMsg.id= 'cityMsg'; 
+    postcodeMsg.id= 'postcodeMsg'; 
+    dniMsg.id= 'dniMsg';  
  
-    
     //EVENTS BLUR
     names.addEventListener('blur', validateName);
     email.addEventListener('blur', validateEmail);
@@ -58,6 +68,9 @@ window.onload = function () {
     city.addEventListener('focus', focusCity);
     postcode.addEventListener('focus', focusPostcode);
     dni.addEventListener('focus',focusDni);
+
+    // EVENT SUBMIT
+    form.addEventListener('submit', submitForm);
 
     //FUNCTIONS VALIDATIOS ********************************************
     //VALIDATE NAME 
@@ -91,12 +104,11 @@ window.onload = function () {
                 textMsg += 'Must be made only of letters and spaces. ';
             }
         }
-
         if (textMsg!=''){           // if exist an error, show it
             nameMsg.innerText = textMsg; 
             names.parentElement.appendChild(nameMsg);
         }else{
-            names.parentElement.removeChild(nameMsg);
+            focusName();
         }
     }
 
@@ -126,7 +138,7 @@ window.onload = function () {
             emailMsg.innerText = textMsg; 
             email.parentElement.appendChild(emailMsg);
         }else{
-            email.parentElement.removeChild(emailMsg);
+            focusEmail();
         }
     }
 
@@ -152,10 +164,10 @@ window.onload = function () {
                 }
             });
 
-            if (countLetter==0 || countNumber==0){              //validate the occurrence of at least 1 number and 1  letter
+            if (countLetter==0 || countNumber==0){         //validate the occurrence of at least 1 number and 1  letter
                 textMsg += 'Must contain at least one letter and one number. '; 
             }
-            if (password.value.length<8){                       // validate the password length is greater than 6
+            if (password.value.length<8){                  // validate the password length is greater than 6
                 textMsg += 'The length must be more than 8 characters. '; 
             }
             if (password.value.length-countNumber-countLetter!=0){  //validate the password is only made of letters and numbers
@@ -166,7 +178,7 @@ window.onload = function () {
             passwordMsg.innerText = textMsg; 
             password.parentElement.appendChild(passwordMsg);
         }else{
-            password.parentElement.removeChild(passwordMsg);
+            focusPassword();
         }
     }
 
@@ -180,12 +192,11 @@ window.onload = function () {
         } else if (password2.value !== password.value){
             textMsg = 'The passwords don\'t match'; 
         }  
-
         if (textMsg!=''){           // if exist an error, show it
             password2Msg.innerText = textMsg; 
             password2.parentElement.appendChild(password2Msg);
         }else{
-            password2.parentElement.removeChild(password2Msg);
+            focusPassword2();
         }
     }
 
@@ -201,12 +212,11 @@ window.onload = function () {
         } else if(parseInt(age.value)<18){
             textMsg += 'Must be older than 18. ';
         }
-        
         if (textMsg!=''){           // if exist an error, show it
             ageMsg.innerText = textMsg; 
             age.parentElement.appendChild(ageMsg);
         }else{
-            age.parentElement.removeChild(ageMsg);
+            focusAge();
         }
     }
 
@@ -231,14 +241,14 @@ window.onload = function () {
                 textMsg += 'Must be made only of numbers. ';
             }
             if (tel.value.length < 7){
-                textMsg += '. '; // validate the tel length is greater than 6
+                textMsg += 'The length must be more than 7 characters. '; // validate the tel length is greater than 6
             }
         }
         if (textMsg!=''){           // if exist an error, show it
             telMsg.innerText = textMsg; 
             tel.parentElement.appendChild(telMsg);
         }else{
-            tel.parentElement.removeChild(telMsg);
+            focusTel();
         }
     }
 
@@ -287,7 +297,7 @@ window.onload = function () {
             addressMsg.innerText = textMsg; 
             address.parentElement.appendChild(addressMsg);
         }else{
-            address.parentElement.removeChild(addressMsg);
+            focusAddress();
         }
     }
 
@@ -319,7 +329,7 @@ window.onload = function () {
             cityMsg.innerText = textMsg; 
             city.parentElement.appendChild(cityMsg);
         }else{
-            city.parentElement.removeChild(cityMsg);
+            focusCity();
         }
     }
 
@@ -351,7 +361,7 @@ window.onload = function () {
             postcodeMsg.innerText = textMsg; 
             postcode.parentElement.appendChild(postcodeMsg);
         }else{
-            postcode.parentElement.removeChild(postcodeMsg);
+            focusPostcode();
         }
     }
 
@@ -378,19 +388,16 @@ window.onload = function () {
                 textMsg += 'The length must be between 7 and 8 characters.';/// validate the dni length is equal to 7 or 8
             }
         }
-
         if (textMsg!=''){           // if exist an error, show it
             dniMsg.innerText = textMsg; 
             dni.parentElement.appendChild(dniMsg);
         }else{
-            dni.parentElement.removeChild(dniMsg);
+            focusDni();
         }
     }
-
-
     // FUNCTIONS FOCUS ***********************************************************
     function focusName(){
-        if(nameMsg.parentNode){
+        if(nameMsg.parentNode){    //if the msg exists, remove it
             names.parentElement.removeChild(nameMsg);
         }
     }
@@ -440,6 +447,80 @@ window.onload = function () {
         }
     }
 
+
+    //FUNCTION SUBMIT*************************************************************
+    
+    function submitForm(e){
+        e.preventDefault();
+        
+        //validate all again
+        validateName();
+        validateEmail();
+        validatePassword();
+        validatePassword2();
+        validateAge();
+        validateTel();
+        validateAddress();
+        validateCity();
+        validatePostcode();
+        validateDni();
+
+        var errors= document.querySelectorAll('.errorMsg');   //catch all the errors
+        var messageAlert;
+        
+        if (errors.length == 0){    //pass without errors
+            //build the alert message
+            messageAlert = 'VALIDATION OK! \n\n'
+            messageAlert += 'Name: '+ names.value;
+            messageAlert +=  '\n' + 'Email: '+ email.value;
+            messageAlert +=  '\n' + 'Password: '+ password.value;
+            messageAlert +=  '\n' + 'Password2: '+ password2.value; 
+            messageAlert +=  '\n' + 'Age: '+ age.value;
+            messageAlert +=  '\n' + 'Tel: '+ tel.value;
+            messageAlert +=  '\n' + 'City: '+ city.value; 
+            messageAlert +=  '\n' + 'Postcode: '+ postcode.value; 
+            messageAlert +=  '\n' + 'DNI: '+ dni.value;
+        }else {    //pass with errors
+            messageAlert =  errors.length + ' ERRORS HAVE BEEN FOUND \n\n'
+            messageAlert += 'Name: '+ names.value;
+            if (nameMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+nameMsg.textContent;
+            }
+            messageAlert +=  '\n' + 'Email: '+ email.value;
+            if (emailMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+emailMsg.textContent;
+            }
+            messageAlert +=  '\n' + 'Password: '+ password.value;
+            if (passwordMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+ passwordMsg.textContent;
+            }
+            messageAlert +=  '\n' + 'Password2: '+ password2.value; 
+            if (password2Msg.parentNode){
+                messageAlert += '\n'+'Errors: '+ password2Msg.textContent;
+            }
+            messageAlert +=  '\n' + 'Age: '+ age.value;
+            if (ageMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+ageMsg.textContent;
+            }
+            messageAlert +=  '\n' + 'Tel: '+ tel.value;
+            if (telMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+telMsg.textContent;
+            }
+            messageAlert +=  '\n' + 'City: '+ city.value; 
+            if (cityMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+cityMsg.textContent;
+            }
+            messageAlert +=  '\n' + 'Postcode: '+ postcode.value; 
+            if (postcodeMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+postcodeMsg.textContent;
+            }
+            messageAlert +=  '\n' + 'DNI: '+ dni.value;
+            if (dniMsg.parentNode){
+                messageAlert += '\n'+'Errors: '+dniMsg.textContent;
+            }
+        }
+        window.alert(messageAlert); 
+    }
 }
 
 
