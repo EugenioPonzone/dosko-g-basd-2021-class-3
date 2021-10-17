@@ -212,8 +212,12 @@ form ul li input[type="submit"]{
     font-weight: bold;
     text-transform: uppercase;
 }
-
-
+.errorMsg{
+    display: block;
+    margin-top: 10px;
+    font-size: 10px;
+    color: red;
+}
 
 
 @media (min-width: 421px){
