@@ -12,6 +12,7 @@ window.onload = function () {
     var postcode = document.getElementById('postcode');
     var dni = document.getElementById('dni');
     var form = document.getElementsByTagName('form')[0];
+    var formTitle = document.getElementById('formTitle');
 
     //CREATE ELEMENTS TO ERROR MSGs
     var nameMsg  = document.createElement('p');
@@ -71,6 +72,9 @@ window.onload = function () {
 
     // EVENT SUBMIT
     form.addEventListener('submit', submitForm);
+
+    //EVENT KEYDOWN
+    names.addEventListener('keydown', keydownName);
 
     //FUNCTIONS VALIDATIOS ********************************************
     //VALIDATE NAME 
@@ -519,7 +523,13 @@ window.onload = function () {
                 messageAlert += '\n'+'Errors: '+dniMsg.textContent;
             }
         }
-        window.alert(messageAlert); 
+        alert(messageAlert); 
+    }
+
+    //BONUS FUNCTION *********************************************
+    function keydownName(e){
+        var textTitle = e.target.value.toUpperCase();
+        formTitle.innerText = 'HOLA '+ textTitle;
     }
 }
 
