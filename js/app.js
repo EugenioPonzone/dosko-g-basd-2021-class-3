@@ -449,7 +449,7 @@ window.onload = function () {
 
             //WEEK 06 ***************************************************************************************
 
-            var url = 'http://curso-dev-2021.herokuapp.com/newsletter?name='+names.value+'&email='+email.value+'&password='+password.value+'&repeat password='+password2.value+'&age='+age.value+'&tel='+tel.value+'&address='+address.value+'&city='+city.value+'&postcode='+postcode.value+'&dni='+dni.value;
+            var url = 'https://curso-dev-2021.herokuapp.com/newsletter?name='+names.value+'&email='+email.value+'&password='+password.value+'&repeat password='+password2.value+'&age='+age.value+'&tel='+tel.value+'&address='+address.value+'&city='+city.value+'&postcode='+postcode.value+'&dni='+dni.value;
 
             //create and append an UL element into the modal
             var contentModal= document.getElementById('contentModal'); 
