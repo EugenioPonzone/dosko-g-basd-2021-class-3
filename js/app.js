@@ -1,4 +1,18 @@
 window.onload = function () {
+  
+    //PRELOAD THE LOCALSTORAGE VALUES
+   var arrayLabels = document.querySelectorAll('label');
+    
+   if (localStorage.length!=0){
+       for (const property in localStorage){
+           arrayLabels.forEach(label => {
+               var labelLower = label.innerText.toLocaleLowerCase();
+               if (labelLower == property){
+                   label.nextElementSibling.value = localStorage[property];
+               }
+           });
+       }
+   }
 
     // CATCH ELEMENTS FROM THE DOM
     var names = document.getElementById('name');
@@ -49,7 +63,9 @@ window.onload = function () {
     cityMsg.id= 'cityMsg'; 
     postcodeMsg.id= 'postcodeMsg'; 
     dniMsg.id= 'dniMsg';  
+
  
+    //EVENTS LISTENER****************************************************************************
     //EVENTS BLUR
     names.addEventListener('blur', validateName);
     email.addEventListener('blur', validateEmail);
@@ -83,8 +99,7 @@ window.onload = function () {
     //EVENT CLICK MODAL
     buttomModal.addEventListener('click',closeModal);
 
-
-    //FUNCTIONS VALIDATIOS ********************************************
+    //FUNCTIONS VALIDATIOS *********************************************************
     //VALIDATE NAME 
     function validateName() {
         
@@ -434,7 +449,7 @@ window.onload = function () {
 
             //WEEK 06 ***************************************************************************************
 
-            var url = 'http://curso-dev-2021.herokuapp.com/newsletter?name='+names.value+'&email='+email.value+'&password='+password.value+'&password2='+password2.value+'&age='+age.value+'&tel='+tel.value+'&address='+address.value+'&city='+city.value+'&postcode='+postcode.value+'&dni='+dni.value;
+            var url = 'http://curso-dev-2021.herokuapp.com/newsletter?name='+names.value+'&email='+email.value+'&password='+password.value+'&repeat password='+password2.value+'&age='+age.value+'&tel='+tel.value+'&address='+address.value+'&city='+city.value+'&postcode='+postcode.value+'&dni='+dni.value;
 
             //create and append an UL element into the modal
             var contentModal= document.getElementById('contentModal'); 
@@ -457,6 +472,7 @@ window.onload = function () {
                         arrayLi[i].innerText=`${property}: ${data[property]}`;
                         ulModal.appendChild(arrayLi[i]);
                         i++;
+                        localStorage.setItem(property, data[property]);  // save the info in localStorage
                     }       
                     modal.classList.toggle('hide',false);   //show the modal  
                 })
@@ -524,10 +540,5 @@ window.onload = function () {
 
         buttomForm.disabled = false; //enable again the form submit buttom
     }
-
-
 }
-
-
-
 
