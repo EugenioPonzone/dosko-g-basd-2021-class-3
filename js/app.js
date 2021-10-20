@@ -111,8 +111,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             nameMsg.innerText = textMsg; 
             names.parentElement.appendChild(nameMsg);
-        }else{
-            focusName();
         }
     }
 
@@ -141,8 +139,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             emailMsg.innerText = textMsg; 
             email.parentElement.appendChild(emailMsg);
-        }else{
-            focusEmail();
         }
     }
 
@@ -181,8 +177,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             passwordMsg.innerText = textMsg; 
             password.parentElement.appendChild(passwordMsg);
-        }else{
-            focusPassword();
         }
     }
 
@@ -199,8 +193,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             password2Msg.innerText = textMsg; 
             password2.parentElement.appendChild(password2Msg);
-        }else{
-            focusPassword2();
         }
     }
 
@@ -219,8 +211,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             ageMsg.innerText = textMsg; 
             age.parentElement.appendChild(ageMsg);
-        }else{
-            focusAge();
         }
     }
 
@@ -251,8 +241,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             telMsg.innerText = textMsg; 
             tel.parentElement.appendChild(telMsg);
-        }else{
-            focusTel();
         }
     }
 
@@ -300,8 +288,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             addressMsg.innerText = textMsg; 
             address.parentElement.appendChild(addressMsg);
-        }else{
-            focusAddress();
         }
     }
 
@@ -332,8 +318,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             cityMsg.innerText = textMsg; 
             city.parentElement.appendChild(cityMsg);
-        }else{
-            focusCity();
         }
     }
 
@@ -364,8 +348,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             postcodeMsg.innerText = textMsg; 
             postcode.parentElement.appendChild(postcodeMsg);
-        }else{
-            focusPostcode();
         }
     }
 
@@ -395,8 +377,6 @@ window.onload = function () {
         if (textMsg!=''){           // if exist an error, show it
             dniMsg.innerText = textMsg; 
             dni.parentElement.appendChild(dniMsg);
-        }else{
-            focusDni();
         }
     }
     // FUNCTIONS FOCUS ***********************************************************
@@ -439,7 +419,8 @@ window.onload = function () {
             messageAlert +=  '\n' + 'City: '+ city.value; 
             messageAlert +=  '\n' + 'Postcode: '+ postcode.value; 
             messageAlert +=  '\n' + 'DNI: '+ dni.value;
-        }else {    //pass with errors
+            
+        }else {    //no pass: errors detected
             messageAlert =  errors.length + ' ERRORS HAVE BEEN FOUND \n\n'
             messageAlert += 'Name: '+ names.value;
             if (nameMsg.parentNode){
