@@ -13,6 +13,10 @@ window.onload = function () {
     var dni = document.getElementById('dni');
     var form = document.getElementsByTagName('form')[0];
     var formTitle = document.getElementById('formTitle');
+    var buttomForm = document.getElementById('buttomForm');
+    var modal = document.getElementById('modal');
+    var titleModal = document.getElementById('titleModal')
+    var buttomModal = document.getElementById('buttomModal');
 
     //CREATE ELEMENTS TO ERROR MSGs
     var nameMsg  = document.createElement('p');
@@ -75,6 +79,10 @@ window.onload = function () {
 
     //EVENT KEYDOWN
     names.addEventListener('keydown', keydownName);
+
+    //EVENT CLICK MODAL
+    buttomModal.addEventListener('click',closeModal);
+
 
     //FUNCTIONS VALIDATIOS ********************************************
     //VALIDATE NAME 
@@ -379,7 +387,7 @@ window.onload = function () {
             dni.parentElement.appendChild(dniMsg);
         }
     }
-    // FUNCTIONS FOCUS ***********************************************************
+    // FUNCTIONS FOCUS ***********************************************************************************************
     function focusFunction(e){
 
         var errorMsg = e.target.nextElementSibling; //try to catch the error msg
@@ -388,7 +396,7 @@ window.onload = function () {
         }
     }
 
-    //FUNCTION SUBMIT*************************************************************
+    //FUNCTION SUBMIT**************************************************************************************************
     function submitForm(e){
         e.preventDefault();
         
@@ -407,7 +415,9 @@ window.onload = function () {
         var errors= document.querySelectorAll('.errorMsg');   //catch all the errors
         var messageAlert;
         
-        if (errors.length == 0){    //pass without errors
+        if (errors.length == 0){    //pass without errors   
+            buttomForm.disabled =true; //disable the form buttom
+            
             //build the alert message
             messageAlert = 'VALIDATION OK! \n\n'
             messageAlert += 'Name: '+ names.value;
@@ -416,10 +426,49 @@ window.onload = function () {
             messageAlert +=  '\n' + 'Password2: '+ password2.value; 
             messageAlert +=  '\n' + 'Age: '+ age.value;
             messageAlert +=  '\n' + 'Tel: '+ tel.value;
+            messageAlert +=  '\n' + 'Address: '+ address.value;
             messageAlert +=  '\n' + 'City: '+ city.value; 
             messageAlert +=  '\n' + 'Postcode: '+ postcode.value; 
             messageAlert +=  '\n' + 'DNI: '+ dni.value;
-            
+            alert(messageAlert);    
+
+            //WEEK 06 ***************************************************************************************
+
+            var url = 'http://curso-dev-2021.herokuapp.com/newsletter?name='+names.value+'&email='+email.value+'&password='+password.value+'&password2='+password2.value+'&age='+age.value+'&tel='+tel.value+'&address='+address.value+'&city='+city.value+'&postcode='+postcode.value+'&dni='+dni.value;
+
+            //create and append an UL element into the modal
+            var contentModal= document.getElementById('contentModal'); 
+            ulModal = document.createElement('ul');
+            ulModal.id='modalUl';
+            contentModal.appendChild(ulModal);
+
+            fetch(url)
+                .then(function respuesta(res){
+                    return res.json();
+                })
+                .then(function info(data){
+                    titleModal.innerText= 'SUBSCRIPTION SUCCESSFUL'
+                    
+                    //create and append li elements per each property in the json object
+                    var arrayLi=[10];
+                    i=0;
+                    for (const property in data){
+                        arrayLi[i]=document.createElement('li');
+                        arrayLi[i].innerText=`${property}: ${data[property]}`;
+                        ulModal.appendChild(arrayLi[i]);
+                        i++;
+                    }       
+                    modal.classList.toggle('hide',false);   //show the modal  
+                })
+                .catch(function faiulure(error){
+                    titleModal.innerText= 'SUBSCRIPTION FAILED'
+                    var li = document.createElement('li');
+                    li.innerText=error;
+                    ulModal.appendChild(li);
+
+                    modal.classList.toggle('hide',false);    //show the modal  
+                });
+                
         }else {    //no pass: errors detected
             messageAlert =  errors.length + ' ERRORS HAVE BEEN FOUND \n\n'
             messageAlert += 'Name: '+ names.value;
@@ -458,15 +507,25 @@ window.onload = function () {
             if (dniMsg.parentNode){
                 messageAlert += '\n'+'Errors: '+dniMsg.textContent;
             }
+            alert(messageAlert); 
         }
-        alert(messageAlert); 
     }
 
-    //BONUS FUNCTION *********************************************
+    //BONUS FUNCTION ***********************************************************************************************
     function keydownName(e){
         var textTitle = e.target.value.toUpperCase();
         formTitle.innerText = 'HOLA '+ textTitle;
     }
+
+    //CLOSE MODAL
+    function closeModal(){
+        modal.classList.toggle('hide',true); //hide the mdoal
+        contentModal.removeChild(ulModal); // remove the information to avoid it being seen from the inspector
+
+        buttomForm.disabled = false; //enable again the form submit buttom
+    }
+
+
 }
 
 
