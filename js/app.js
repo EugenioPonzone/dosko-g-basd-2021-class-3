@@ -31,6 +31,7 @@ window.onload = function () {
     var modal = document.getElementById('modal');
     var titleModal = document.getElementById('titleModal')
     var buttomModal = document.getElementById('buttomModal');
+    var sendToServer = document.getElementById('sendToServer');
 
     //CREATE ELEMENTS TO ERROR MSGs
     var nameMsg  = document.createElement('p');
@@ -94,10 +95,13 @@ window.onload = function () {
     form.addEventListener('submit', submitForm);
 
     //EVENT KEYDOWN
-    names.addEventListener('keydown', keydownName);
+    names.addEventListener('keyup', keyUpName);
 
     //EVENT CLICK MODAL
     buttomModal.addEventListener('click',closeModal);
+
+   //EVENT CLICK SEND
+   sendToServer.addEventListener('click',sendServer);
 
     //FUNCTIONS VALIDATIOS *********************************************************
     //VALIDATE NAME 
@@ -412,6 +416,7 @@ window.onload = function () {
     }
 
     //FUNCTION SUBMIT**************************************************************************************************
+    // this function will show only the validation results (it wont send the info to the server)
     function submitForm(e){
         e.preventDefault();
         
@@ -427,114 +432,76 @@ window.onload = function () {
         validatePostcode();
         validateDni();
 
+        //create and append an UL element into the modal
+        var contentModal= document.getElementById('contentModal'); 
+        ulModal = document.createElement('ul');
+        ulModal.id='modalUl';
+        contentModal.appendChild(ulModal);
+
+        buttomForm.disabled =true; //disable the form buttom
+
         var errors= document.querySelectorAll('.errorMsg');   //catch all the errors
-        var messageAlert;
-        
         if (errors.length == 0){    //pass without errors   
-            buttomForm.disabled =true; //disable the form buttom
             
-            //build the alert message
-            messageAlert = 'VALIDATION OK! \n\n'
-            messageAlert += 'Name: '+ names.value;
-            messageAlert +=  '\n' + 'Email: '+ email.value;
-            messageAlert +=  '\n' + 'Password: '+ password.value;
-            messageAlert +=  '\n' + 'Password2: '+ password2.value; 
-            messageAlert +=  '\n' + 'Age: '+ age.value;
-            messageAlert +=  '\n' + 'Tel: '+ tel.value;
-            messageAlert +=  '\n' + 'Address: '+ address.value;
-            messageAlert +=  '\n' + 'City: '+ city.value; 
-            messageAlert +=  '\n' + 'Postcode: '+ postcode.value; 
-            messageAlert +=  '\n' + 'DNI: '+ dni.value;
-            alert(messageAlert);    
+            titleModal.innerText= 'VALIDATION SUCCESSFUL';
+            arrayLabels.forEach(label =>{
+                ulModal.innerHTML += `<li>${label.innerText}: ${label.nextElementSibling.value}</li>`;
+            });
 
-            //WEEK 06 ***************************************************************************************
-
-            var url = 'https://curso-dev-2021.herokuapp.com/newsletter?name='+names.value+'&email='+email.value+'&password='+password.value+'&repeat password='+password2.value+'&age='+age.value+'&tel='+tel.value+'&address='+address.value+'&city='+city.value+'&postcode='+postcode.value+'&dni='+dni.value;
-
-            //create and append an UL element into the modal
-            var contentModal= document.getElementById('contentModal'); 
-            ulModal = document.createElement('ul');
-            ulModal.id='modalUl';
-            contentModal.appendChild(ulModal);
-
-            fetch(url)
-                .then(function respuesta(res){
-                    return res.json();
-                })
-                .then(function info(data){
-                    titleModal.innerText= 'SUBSCRIPTION SUCCESSFUL'
-                    
-                    //create and append li elements per each property in the json object
-                    var arrayLi=[10];
-                    i=0;
-                    for (const property in data){
-                        arrayLi[i]=document.createElement('li');
-                        arrayLi[i].innerText=`${property}: ${data[property]}`;
-                        ulModal.appendChild(arrayLi[i]);
-                        i++;
-                        localStorage.setItem(property, data[property]);  // save the info in localStorage
-                    }       
-                    modal.classList.toggle('hide',false);   //show the modal  
-                })
-                .catch(function faiulure(error){
-                    titleModal.innerText= 'SUBSCRIPTION FAILED'
-                    var li = document.createElement('li');
-                    li.innerText=error;
-                    ulModal.appendChild(li);
-
-                    modal.classList.toggle('hide',false);    //show the modal  
-                });
+            sendToServer.classList.toggle('hide',false); // enable the buttom to send the info to server
+            modal.classList.toggle('hide',false);  
                 
         }else {    //no pass: errors detected
-            messageAlert =  errors.length + ' ERRORS HAVE BEEN FOUND \n\n'
-            messageAlert += 'Name: '+ names.value;
-            if (nameMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+nameMsg.textContent;
-            }
-            messageAlert +=  '\n' + 'Email: '+ email.value;
-            if (emailMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+emailMsg.textContent;
-            }
-            messageAlert +=  '\n' + 'Password: '+ password.value;
-            if (passwordMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+ passwordMsg.textContent;
-            }
-            messageAlert +=  '\n' + 'Password2: '+ password2.value; 
-            if (password2Msg.parentNode){
-                messageAlert += '\n'+'Errors: '+ password2Msg.textContent;
-            }
-            messageAlert +=  '\n' + 'Age: '+ age.value;
-            if (ageMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+ageMsg.textContent;
-            }
-            messageAlert +=  '\n' + 'Tel: '+ tel.value;
-            if (telMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+telMsg.textContent;
-            }
-            messageAlert +=  '\n' + 'City: '+ city.value; 
-            if (cityMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+cityMsg.textContent;
-            }
-            messageAlert +=  '\n' + 'Postcode: '+ postcode.value; 
-            if (postcodeMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+postcodeMsg.textContent;
-            }
-            messageAlert +=  '\n' + 'DNI: '+ dni.value;
-            if (dniMsg.parentNode){
-                messageAlert += '\n'+'Errors: '+dniMsg.textContent;
-            }
-            alert(messageAlert); 
+            titleModal.innerText= 'VALIDATION FAILED';
+            arrayLabels.forEach(label =>{
+                ulModal.innerHTML += `<li>${label.innerText}: ${label.nextElementSibling.value}</li>`
+                if (label.nextElementSibling.nextElementSibling){    //if it has an error , show it
+                    ulModal.innerHTML += `<li>Error: ${label.nextElementSibling.nextElementSibling.innerText}</li>`;
+                }
+            }) 
+            modal.classList.toggle('hide',false);  
         }
     }
 
+    //SEND TO SERVER
+    // this function will send the info to the server
+    function sendServer(){
+
+        var url = 'https://curso-dev-2021.herokuapp.com/newsletter?name='+names.value+'&email='+email.value+'&password='+password.value+'&repeat password='+password2.value+'&age='+age.value+'&tel='+tel.value+'&address='+address.value+'&city='+city.value+'&postcode='+postcode.value+'&dni='+dni.value;
+
+        fetch(url)
+            .then(function respuesta(res){
+                if (res.status === 200){
+                    return res.json();
+                }else{
+                    throw  new Error(`HTTP ${res.status}`)
+                }
+            })
+            .then(function info(data){
+                sendToServer.classList.toggle('hide',true); //hide the buttom send
+                titleModal.innerText= 'SUBSCRIPTION SUCCESSFUL'
+                ulModal.innerHTML = '';
+                for (const property in data){
+                    ulModal.innerHTML+=`<li>${property}: ${data[property]}</li>`;
+                    localStorage.setItem(property, data[property]);  // save the info in localStorage
+                }        
+            })
+            .catch(function faiulure(error){
+                console.log(error)
+                sendToServer.classList.toggle('hide',true); //hide the buttom send
+                titleModal.innerText= 'SUBSCRIPTION FAILED'
+                ulModal.innerHTML=`<li>${error}</li>`; 
+            });
+    }
+
     //BONUS FUNCTION ***********************************************************************************************
-    function keydownName(e){
+    function keyUpName(e){
         var textTitle = e.target.value.toUpperCase();
         formTitle.innerText = 'HOLA '+ textTitle;
     }
-
     //CLOSE MODAL
     function closeModal(){
+        sendToServer.classList.toggle('hide',true); //hide the buttom send
         modal.classList.toggle('hide',true); //hide the mdoal
         contentModal.removeChild(ulModal); // remove the information to avoid it being seen from the inspector
 
